@@ -27,7 +27,7 @@
             <HBox alignment="CENTER_LEFT" spacing="10.0">
                <children>
                   <Label text="Corso:" />
-                  <ComboBox prefWidth="150.0" promptText="Corsi" />
+                  <ComboBox fx:id="comboCorso" prefWidth="150.0" promptText="Corsi" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -41,14 +41,14 @@
             <HBox alignment="CENTER_LEFT" spacing="10.0">
                <children>
                   <Label text="Studente" />
-                  <TextField prefHeight="25.0" prefWidth="61.0" text="200482" />
+                  <TextField fx:id="txtMatricola" prefHeight="25.0" prefWidth="61.0" />
                   <Button mnemonicParsing="false" style="-fx-background-color: #008000;" text="√" textAlignment="JUSTIFY" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <TextField prefHeight="25.0" prefWidth="122.0" text="GIORGIO" />
-                  <TextField prefHeight="25.0" prefWidth="129.0" text="RIBERO" />
+                  <TextField fx:id="txtNome" editable="false" prefHeight="25.0" prefWidth="122.0" />
+                  <TextField fx:id="txtCognome" editable="false" prefHeight="25.0" prefWidth="129.0" />
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -70,7 +70,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </GridPane>
-            <TextArea>
+            <TextArea fx:id="txtResult" editable="false">
                <padding>
                   <Insets left="10.0" right="10.0" />
                </padding>
@@ -80,7 +80,7 @@
             </TextArea>
             <HBox alignment="CENTER_RIGHT">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Reset">
+                  <Button fx:id="btnReset" mnemonicParsing="false" onAction="#doReset" prefHeight="25.0" prefWidth="73.0" text="Reset">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>

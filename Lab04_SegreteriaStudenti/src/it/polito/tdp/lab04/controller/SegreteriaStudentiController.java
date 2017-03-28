@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import it.polito.tdp.lab04.DAO.CorsoDAO;
 import it.polito.tdp.lab04.model.Corso;
 import it.polito.tdp.lab04.model.Model;
 import it.polito.tdp.lab04.model.Studente;
@@ -50,12 +51,18 @@ public class SegreteriaStudentiController {
 	private TextField txtCognome;
 
 	public void setModel(Model model) {
+		
+		this.model = model;
 
 	}
 
 	@FXML
 	void doReset(ActionEvent event) {
-
+		
+		txtMatricola.clear();
+		txtNome.clear();
+		txtCognome.clear();
+		txtResult.clear();
 	}
 
 	@FXML
@@ -90,6 +97,12 @@ public class SegreteriaStudentiController {
 		assert btnIscrivi != null : "fx:id=\"btnIscrivi\" was not injected: check your FXML file 'SegreteriaStudenti.fxml'.";
 		assert txtMatricola != null : "fx:id=\"txtMatricola\" was not injected: check your FXML file 'SegreteriaStudenti.fxml'.";
 		assert btnReset != null : "fx:id=\"btnReset\" was not injected: check your FXML file 'SegreteriaStudenti.fxml'.";
+		
+		CorsoDAO corsoDAO = new CorsoDAO();
+		
+		 comboCorso.getItems().addAll(corsoDAO.getTuttiICorsi());
+	     	if(comboCorso.getItems().size() > 0)
+	     		comboCorso.setValue(comboCorso.getItems().get(0));
 	}
 
 }
