@@ -12,6 +12,8 @@ import it.polito.tdp.lab04.model.Corso;
 import it.polito.tdp.lab04.model.Studente;
 
 public class CorsoDAO {
+	
+	//StudenteDAO studenteDAO = new StudenteDAO();
 
 	/*
 	 * Ottengo tutti i corsi salvati nel Db
@@ -27,8 +29,6 @@ public class CorsoDAO {
 			PreparedStatement st = conn.prepareStatement(sql);
 
 			ResultSet rs = st.executeQuery();
-			
-			corsi.add(new Corso ("prova",6,"prova",2));
 
 			while (rs.next()) {
 				
@@ -46,7 +46,7 @@ public class CorsoDAO {
 				corsi.add(c);
 			}
 			
-			conn.close();
+			//conn.close();
 
 			return corsi;
 
@@ -59,15 +59,79 @@ public class CorsoDAO {
 	/*
 	 * Dato un codice insegnamento, ottengo il corso
 	 */
-	public void getCorso(Corso corso) {
+	public Corso getCorso(String codins) {
 		// TODO
+		
+		final String sql = "SELECT * FROM corso WHERE codins=?";
+
+		try {
+			Connection conn = ConnectDB.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			
+			st.setString(1, codins);
+
+			ResultSet rs = st.executeQuery();
+			
+			Corso c = null;
+			
+			if(rs.next()){
+				int crediti = rs.getInt("crediti");
+				String nome = rs.getString("nome");
+				int pd = rs.getInt("pd");
+				
+				c = new Corso (codins,crediti,nome,pd);
+			}
+
+			//conn.close();
+
+			return c;
+
+		} catch (SQLException e) {
+			//e.printStackTrace();
+			throw new RuntimeException("Errore Db");
+		}
 	}
 
 	/*
 	 * Ottengo tutti gli studenti iscritti al Corso
 	 */
-	public void getStudentiIscrittiAlCorso(Corso corso) {
+	public List<Studente> getStudentiIscrittiAlCorso(Corso corso) {
 		// TODO
+		
+		StudenteDAO studenteDAO = new StudenteDAO();
+		
+		final String sql = "SELECT matricola FROM iscrizione WHERE codins=?";
+
+		List<Studente> studenti = new LinkedList<Studente>();
+		
+		try {
+			Connection conn = ConnectDB.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			
+			st.setString(1, corso.getCodins());
+
+			ResultSet rs = st.executeQuery();
+
+			while (rs.next()) {
+				
+				int matricola = rs.getInt("matricola");
+				
+				Studente s = studenteDAO.cercaStudente(matricola);
+				
+				// Aggiungi il nuovo Corso alla lista
+				
+				studenti.add(s);
+			}
+			
+			//conn.close();
+
+			return studenti;
+
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			throw new RuntimeException("Errore Db");
+		}
+		
 	}
 
 	/*

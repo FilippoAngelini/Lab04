@@ -45,6 +45,11 @@ public class Corso {
 	public void setPd(int pd) {
 		this.pd = pd;
 	}
+
+	@Override
+	public String toString() {
+		return codins + " " + crediti + " " + nome + " " + pd;
+	}
 	
 	
 

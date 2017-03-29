@@ -33,7 +33,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </HBox>
-            <Button mnemonicParsing="false" text="Cerca iscritti corso">
+            <Button fx:id="btnCercaIscrittiCorso" mnemonicParsing="false" onAction="#doCercaIscrittiCorso" text="Cerca iscritti corso">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
@@ -42,7 +42,7 @@
                <children>
                   <Label text="Studente" />
                   <TextField fx:id="txtMatricola" prefHeight="25.0" prefWidth="61.0" />
-                  <Button mnemonicParsing="false" style="-fx-background-color: #008000;" text="√" textAlignment="JUSTIFY" textFill="WHITE">
+                  <Button fx:id="btnCercaNome" mnemonicParsing="false" onAction="#doCercaNome" style="-fx-background-color: #008000;" text="√" textAlignment="JUSTIFY" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -63,7 +63,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Cerca corsi" />
+                  <Button fx:id="btnCercaCorsi" mnemonicParsing="false" onAction="#doCercaCorsi" prefHeight="25.0" prefWidth="87.0" text="Cerca corsi" />
                   <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Iscrivi" GridPane.columnIndex="1" />
                </children>
                <VBox.margin>

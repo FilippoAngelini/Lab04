@@ -53,6 +53,12 @@ public class SegreteriaStudentiController {
 	public void setModel(Model model) {
 		
 		this.model = model;
+		
+		/*String stringaVuota="";
+		comboCorso.getItems().add(stringaVuota);*/
+		comboCorso.getItems().addAll(this.model.getTuttiICorsi());
+     	if(comboCorso.getItems().size() > 0)
+     		comboCorso.setValue(comboCorso.getItems().get(0));
 
 	}
 
@@ -68,15 +74,43 @@ public class SegreteriaStudentiController {
 	@FXML
 	void doCercaNome(ActionEvent event) {
 
+		if(!txtMatricola.getText().matches("[0-9]*")){
+			txtResult.setText("Matricola non valida: inserisci solo numeri!");
+			return;
+		}
+		
+		int matricola = Integer.parseInt(txtMatricola.getText());
+		
+		if(model.cercaNomeStudente(matricola) == null){
+			txtResult.setText("Matricola non trovata!");
+			return;
+		}
+		txtNome.setText(model.cercaNomeStudente(matricola));
+		txtCognome.setText(model.cercaCognomeStudente(matricola));
+
 	}
 
 	@FXML
 	void doCercaIscrittiCorso(ActionEvent event) {
+		
+		txtResult.setText(model.getStudentiIscrittiAlCorso(comboCorso.getValue()));
 
 	}
 
 	@FXML
 	void doCercaCorsi(ActionEvent event) {
+		
+		if(!txtMatricola.getText().matches("[0-9]*")){
+			txtResult.setText("Matricola non valida: inserisci solo numeri!");
+			return;
+		}
+		
+		if(model.cercaNomeStudente(Integer.parseInt(txtMatricola.getText())) == null){
+			txtResult.setText("Matricola inesistente!");
+			return;
+		}
+		
+		txtResult.setText(model.cercaCorsi(Integer.parseInt(txtMatricola.getText())));
 
 	}
 
@@ -98,11 +132,6 @@ public class SegreteriaStudentiController {
 		assert txtMatricola != null : "fx:id=\"txtMatricola\" was not injected: check your FXML file 'SegreteriaStudenti.fxml'.";
 		assert btnReset != null : "fx:id=\"btnReset\" was not injected: check your FXML file 'SegreteriaStudenti.fxml'.";
 		
-		CorsoDAO corsoDAO = new CorsoDAO();
-		
-		 comboCorso.getItems().addAll(corsoDAO.getTuttiICorsi());
-	     	if(comboCorso.getItems().size() > 0)
-	     		comboCorso.setValue(comboCorso.getItems().get(0));
 	}
 
 }
