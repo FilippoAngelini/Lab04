@@ -47,10 +47,10 @@ public class Model {
 	public String cercaCorsi(int matricola) {
 		
 		String ris = "";
-		/*
+		
 		if(studenteDAO.getCorsi(matricola)==null)
 			return "Lo studente non è iscritto a nessun corso!";
-		*/
+		
 		for(Corso c : studenteDAO.getCorsi(matricola))
 			ris += c.toString() + "\n";
 		

@@ -63,10 +63,7 @@ public class StudenteDAO {
 			
 			List<Corso> corsi = new LinkedList<Corso>();
 			//TODO controllo
-			/*
-			if(!rs.next())
-				return null;
-			 */
+			 
 			while (rs.next()) {
 				
 				String codins = rs.getString("codins");
@@ -74,6 +71,9 @@ public class StudenteDAO {
 				corsi.add(corsoDAO.getCorso(codins));
 				
 			}
+			
+			if(corsi.size()==0)
+				return null;
 			
 			//conn.close();
 
