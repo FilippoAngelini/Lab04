@@ -1,13 +1,10 @@
 package it.polito.tdp.lab04.controller;
 
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import it.polito.tdp.lab04.DAO.CorsoDAO;
 import it.polito.tdp.lab04.model.Corso;
 import it.polito.tdp.lab04.model.Model;
-import it.polito.tdp.lab04.model.Studente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -105,7 +102,10 @@ public class SegreteriaStudentiController {
 				txtResult.setText("Matricola inesistente!");
 				return;
 			}
-			txtResult.setText(model.cercaIscrizione(comboCorso.getValue().getCodins(),Integer.parseInt(txtMatricola.getText())));
+			if(model.cercaIscrizione(comboCorso.getValue().getCodins(),Integer.parseInt(txtMatricola.getText())))
+				txtResult.setText("Studente iscritto al corso");
+			else
+				txtResult.setText("Studente NON iscritto al corso");
 		}
 
 	}
@@ -134,7 +134,25 @@ public class SegreteriaStudentiController {
 
 	@FXML
 	void doIscrivi(ActionEvent event) {
-
+		
+		if(txtMatricola.getText().equals("")){
+			txtResult.setText("Devi inserire una matricola!");
+			return;
+		}
+		
+		if(!txtMatricola.getText().matches("[0-9]*")){
+			txtResult.setText("Matricola non valida: inserisci solo numeri!");
+			return;
+		}
+		
+		if(model.cercaNomeStudente(Integer.parseInt(txtMatricola.getText())) == null){
+			txtResult.setText("Matricola inesistente!");
+			return;
+		}
+		if(model.cercaIscrizione(comboCorso.getValue().getCodins(),Integer.parseInt(txtMatricola.getText())))
+			txtResult.setText("Studente gia' iscritto al corso");
+		else if(model.iscriviStudenteACorso(model.getStudente(Integer.parseInt(txtMatricola.getText())),comboCorso.getValue()))
+			txtResult.setText("Lo studente e' ora iscritto al corso");
 	}
 
 	@FXML

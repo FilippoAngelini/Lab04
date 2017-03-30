@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="443.0" prefWidth="501.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.lab04.controller.SegreteriaStudentiController">
+<BorderPane prefHeight="443.0" prefWidth="501.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.lab04.controller.SegreteriaStudentiController">
    <top>
       <Label text="Lab4_Segreteria Studenti" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -64,7 +64,7 @@
               </rowConstraints>
                <children>
                   <Button fx:id="btnCercaCorsi" mnemonicParsing="false" onAction="#doCercaCorsi" prefHeight="25.0" prefWidth="87.0" text="Cerca corsi" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Iscrivi" GridPane.columnIndex="1" />
+                  <Button fx:id="btnIscrivi" mnemonicParsing="false" onAction="#doIscrivi" prefHeight="25.0" prefWidth="73.0" text="Iscrivi" GridPane.columnIndex="1" />
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

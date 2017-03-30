@@ -58,9 +58,19 @@ public class Model {
 
 	}
 
-	public String cercaIscrizione(String codIns, int matricola) {
+	public boolean cercaIscrizione(String codIns, int matricola) {
 		
 		return studenteDAO.cercaIscrizione(codIns, matricola);
+	}
+
+	public Studente getStudente(int matricola) {
+		
+		return studenteDAO.cercaStudente(matricola);
+	}
+
+	public boolean iscriviStudenteACorso(Studente studente, Corso corso) {
+		
+		return corsoDAO.iscriviStudenteACorso(studente, corso);
 	}
 	
 	

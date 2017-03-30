@@ -86,7 +86,7 @@ public class StudenteDAO {
 
 	}
 	
-	public String cercaIscrizione(String codIns, int matricola){
+	public boolean cercaIscrizione(String codIns, int matricola){
 		
 		final String sql = "SELECT * FROM iscrizione WHERE matricola=? AND codins=?";
 
@@ -102,9 +102,9 @@ public class StudenteDAO {
 			//TODO controllo
 			
 			if(rs.next())
-				return "Studente " + matricola + " iscritto al corso " + codIns;
+				return true;
 			else
-				return "Studente " + matricola + " NON iscritto al corso " + codIns;
+				return false;
 			
 			//conn.close();
 
