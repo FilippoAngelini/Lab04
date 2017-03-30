@@ -93,12 +93,30 @@ public class SegreteriaStudentiController {
 	@FXML
 	void doCercaIscrittiCorso(ActionEvent event) {
 		
-		txtResult.setText(model.getStudentiIscrittiAlCorso(comboCorso.getValue()));
+		if(txtMatricola.getText().equals(""))
+			txtResult.setText(model.getStudentiIscrittiAlCorso(comboCorso.getValue()));
+		else{
+			if(!txtMatricola.getText().matches("[0-9]*")){
+				txtResult.setText("Matricola non valida: inserisci solo numeri!");
+				return;
+			}
+			
+			if(model.cercaNomeStudente(Integer.parseInt(txtMatricola.getText())) == null){
+				txtResult.setText("Matricola inesistente!");
+				return;
+			}
+			txtResult.setText(model.cercaIscrizione(comboCorso.getValue().getCodins(),Integer.parseInt(txtMatricola.getText())));
+		}
 
 	}
 
 	@FXML
 	void doCercaCorsi(ActionEvent event) {
+		
+		if(txtMatricola.getText().equals("")){
+			txtResult.setText("Devi inserire una matricola!");
+			return;
+		}
 		
 		if(!txtMatricola.getText().matches("[0-9]*")){
 			txtResult.setText("Matricola non valida: inserisci solo numeri!");

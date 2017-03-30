@@ -57,6 +57,11 @@ public class Model {
 		return ris;
 
 	}
+
+	public String cercaIscrizione(String codIns, int matricola) {
+		
+		return studenteDAO.cercaIscrizione(codIns, matricola);
+	}
 	
 	
 

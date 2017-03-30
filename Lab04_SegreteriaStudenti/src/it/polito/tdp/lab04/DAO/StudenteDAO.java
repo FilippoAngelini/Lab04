@@ -85,6 +85,34 @@ public class StudenteDAO {
 		}
 
 	}
+	
+	public String cercaIscrizione(String codIns, int matricola){
+		
+		final String sql = "SELECT * FROM iscrizione WHERE matricola=? AND codins=?";
+
+		try {
+			Connection conn = ConnectDB.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			
+			st.setInt(1, matricola);
+			st.setString(2, codIns);
+
+			ResultSet rs = st.executeQuery();
+			
+			//TODO controllo
+			
+			if(rs.next())
+				return "Studente " + matricola + " iscritto al corso " + codIns;
+			else
+				return "Studente " + matricola + " NON iscritto al corso " + codIns;
+			
+			//conn.close();
+
+		} catch (SQLException e) {
+			//e.printStackTrace();
+			throw new RuntimeException("Errore Db");
+		}
+	}
 
 
 }
